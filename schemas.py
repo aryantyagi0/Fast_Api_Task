@@ -14,7 +14,7 @@ class UserCreate(UserBase):
     phone_number: Optional[str] = None
     address: Optional[str] = None
     age: Optional[int] = None  
-    city: Optional[str] = None   # <-- added
+    city: Optional[str] = None   
 
 
 # Model for updating a user
@@ -33,7 +33,7 @@ class UserOut(UserBase):
     phone_number: Optional[str] = None
     address: Optional[str] = None
     age: Optional[int] = None  
-    city: Optional[str] = None   # <-- added
+    city: Optional[str] = None   
     created_at: datetime
 
     model_config = {
