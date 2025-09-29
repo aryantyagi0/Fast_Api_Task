@@ -1,5 +1,4 @@
-
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import Column, Integer, String, DateTime
 from database import Base
 
 class User(Base):
@@ -7,12 +6,9 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False, index=True)
+    email = Column(String, unique=True, index=True, nullable=False)
     phone_number = Column(String, nullable=True)
     address = Column(String, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-
-
-    age = Column(Integer, nullable=True)  
-    city = Column(String, nullable=True)
-print("Models imported successfully")
+    age = Column(Integer, nullable=True)       # make sure this exists
+    city = Column(String, nullable=True)       # make sure this exists
+    created_at = Column(DateTime, nullable=False)
