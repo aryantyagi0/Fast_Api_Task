@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: y
+      POSTGRES_PASSWORD: y
+      POSTGRES_DB: y
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+      DATABASE_URL: "postgresql://y:y@db:5432/y"
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  postgres_data:
