@@ -1,33 +1,27 @@
-version: '3.9'
+version: "3.8"
 services:
-  app:
-    image: fast_api_task:c53ce90
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres.vjdbzczvykhixdlagmsw
+      POSTGRES_PASSWORD: Mahiipl%409917
+      POSTGRES_DB: postgres
     ports:
-      - "52166:8000"
-    restart: unless-stopped
-    environment:
-      - DATABASE_URL=postgresql://appuser:apppassword@postgres:5432/appdb
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USER=appuser
-      - POSTGRES_PASSWORD=apppassword
-      - POSTGRES_DB=appdb
-
-    depends_on:
-      postgres:
-        condition: service_healthy
-  postgres:
-    image: postgres:15-alpine
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=appuser
-      - POSTGRES_PASSWORD=apppassword
-      - POSTGRES_DB=appdb
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - "5432:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+      DATABASE_URL: "postgresql+psycopg2://postgres.vjdbzczvykhixdlagmsw:Mahiipl%409917@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres?sslmode=require"
+    depends_on:
+      - db
+    restart: always
+
 volumes:
-  pg_data:
+  postgres_data:
