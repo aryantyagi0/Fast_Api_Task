@@ -4,9 +4,9 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: y
-      POSTGRES_PASSWORD: y
-      POSTGRES_DB: y
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Mahiipl%409917
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
@@ -18,7 +18,7 @@ services:
       - "8000:8000"
     environment:
       PORT: "8000"
-      DATABASE_URL: "postgresql://y:y@db:5432/y"
+      DATABASE_URL: "postgresql+psycopg2://postgres:Mahiipl%409917@db.vjdbzczvykhixdlagmsw.supabase.co:5432/postgres?sslmode=require"
     depends_on:
       - db
     restart: always
